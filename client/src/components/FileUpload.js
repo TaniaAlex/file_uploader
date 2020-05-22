@@ -26,9 +26,11 @@ const FileUpload = () => {
         },
         onUploadProgress: (ProgressEvent) => {
           setUploadPercentage(
-            parseInt(
-              Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total)
-            )
+            file
+              ? parseInt(
+                  Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total)
+                )
+              : null
           );
 
           // Clear progressBar
