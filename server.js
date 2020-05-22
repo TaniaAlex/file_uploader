@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 // Upload Endpoint
 app.post("/upload", (req, res) => {
   if (req.files === null) {
-    return res.status(400).json({ msg: "No file uploaded" });
+    return res.status(400).json({ msg: "Choose file to upload" });
   }
 
   const file = req.files.file;
