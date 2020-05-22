@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Message from "./Message";
+import ProgressBar from "./ProgressBar";
 import axios from "axios";
 
 const FileUpload = () => {
@@ -8,6 +9,7 @@ const FileUpload = () => {
   // as a response from server we get back an object{} with fileName and filePath => thats why we pass {} in useState to show it in the updated state
   const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState("");
+  const [uploadPercentage, setUploadPercentage] = useState(0);
   const onChange = (e) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
@@ -22,7 +24,18 @@ const FileUpload = () => {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+        onUploadProgress: (ProgressEvent) => {
+          setUploadPercentage(
+            parseInt(
+              Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total)
+            )
+          );
+
+          // Clear progressBar
+          setTimeout(() => setUploadPercentage(0), 10000);
+        },
       });
+
       // pull fileName and filePath from response res.data
       const { fileName, filePath } = res.data;
 
@@ -52,6 +65,7 @@ const FileUpload = () => {
             {fileName}
           </label>
         </div>
+        <ProgressBar percentage={uploadPercentage} />
         <input
           type="submit"
           value="Upload"
