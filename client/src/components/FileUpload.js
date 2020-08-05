@@ -33,8 +33,10 @@ const FileUpload = () => {
               : null
           );
 
-          // Clear progressBar
-          setTimeout(() => setUploadPercentage(0), 10000);
+          // Clear progressBar after upload => Reset to Initial State with React Hooks
+          setTimeout(() => setUploadPercentage(0), 3000);
+          // Clear input field after upload => Reset to Initial State with React Hooks
+          setTimeout(() => setFileName("Choose file"), 3000);
         },
       });
 

@@ -3,6 +3,10 @@
 Full stack React-Express file uploader
 Connect and run Node.js and React with Concurrently
 
+### To run both server and client:
+
+npm run dev
+
 ## Dependencies
 
 Server dependencies: express, express-fileupload, dotenv
